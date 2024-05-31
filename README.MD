@@ -9,7 +9,7 @@ TemplateTango is a versatile template engine designed for Arduino and ESP32 micr
 
 MIT License
 
-Copyright (c) 2024 Jonathan L. Pressler
+Copyright (c) 2024 Jonathan Pressler
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
