@@ -69,7 +69,7 @@ void setup() {
     )";
 
     // Collect variable values
-    map<string, string> variables = {
+    std::map<string, string> variables = {
         {"temperature", readTemperature()},
         {"sensor1_reading", readSensor1()},
         {"sensor2_reading", readSensor2()}
@@ -132,7 +132,7 @@ void setup() {
     // Define the route to handle the main page
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
         // Collect the variable values
-        map<string, string> variables = {
+        std::map<string, string> variables = {
             {"temperature", readTemperature()},
             {"sensor1_reading", readSensor1()},
             {"sensor2_reading", readSensor2()}
