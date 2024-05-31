@@ -1,4 +1,5 @@
 # TemplateTango
+![TemplateTango Logo](https://github.com/jonp92/TemplateTango/blob/6bbdf242115dbba2eca92f017660a15902b9c88f/tt_no_text.png?raw=true)
 
 TemplateTango is a versatile template engine designed for Arduino and ESP32 microcontrollers. It allows for the dynamic generation of any text-based content, such as HTML, XML, JSON, or plain text, by substituting placeholders with real-time data from sensors or other sources.
 
