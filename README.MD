@@ -15,65 +15,30 @@ TemplateTango is a versatile template engine designed for Arduino and ESP32 micr
 To use TemplateTango, simply include the `TemplateTango.h` file in your project.
 
 ## Usage
+Before using the `render` method of TemplateTango to replace variables with values, you must specify a mapping of variables and their values. Values must be strings or functions returning Strings. Additionally, the template that will have its variables replaced with values must be stored as a String.
 
-### Basic Example
+Basic arithmetic is supported with operator precedence and parentheses. A simple example might be to convert ºC to ºF.
 
 ```cpp
-#include <Arduino.h>
-#include "TemplateTango.h"
-
-// Functions to simulate sensor readings
-string readTemperature() { return "25.5"; }
-string readSensor1() { return "100.1"; }
-string readSensor2() { return "200.2"; }
-
-void setup() {
-    Serial.begin(9600);
-
-    // Define the template
-    string templateStr = R"(
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Sensor Data</title>
-        </head>
-        <body>
-            <h1>Sensor Readings</h1>
-            <p>Current Temperature: {{temperature}} °C</p>
-            <p>Temperature in Fahrenheit: {{(temperature * 9 / 5) + 32}} °F</p>
-            <p>Sensor 1 Reading: {{sensor1_reading}}</p>
-            <p>Sensor 2 Reading: {{sensor2_reading}}</p>
-        </body>
-        </html>
-    )";
-
-    // Collect variable values
-    std::map<string, string> variables = {
-        {"temperature", readTemperature()},
-        {"sensor1_reading", readSensor1()},
-        {"sensor2_reading", readSensor2()}
-    };
-
-    // Render the template
-    string renderedHtml = TemplateTango::render(templateStr, variables);
-    Serial.println(renderedHtml.c_str());
-}
-
-void loop() {
-    // Main loop
-}
+{{(temperature * 9 / 5) + 32}}
 ```
 
+A basic example of this setup is provided in the `BasicExample` sketch included with this library. The sketch demonstrates how to define a template string, collect variable values, and render the template with these values.
+
+To render a template, simply call the `render` method as follows:
+
+```cpp
+TemplateTango::render(template, variables)
+```
 ## API
 
-**setVariable(const string& varName, const string& value)**
-Sets the value of a variable.
-
-**varName:** The name of the variable.
-value: The value of the variable.
-render(const string& templateStr, const map<string, string>& variables)
+**std::string render(const std::string& templateStr, const std::map<std::string, std::string>& variables)**
 Renders the template string with the provided variables.
 
 **templateStr:** The template string containing placeholders for variables.
-variables: A map of variable names and their corresponding values.
-Returns: A string with variables replaced by their corresponding values.
+**variables:** A map of variable names and their corresponding values.
+**Returns:** A string with variables replaced by their corresponding values.
+
+## Notes
+
+- **String Usage**: To make this library simple to use, Arduino style Strings are employed. Due to dynamic memory allocation, these can lead to memory fragmentation issues. Additionally, large mappings may cause memory overflow issues if there is not sufficient RAM. Avoid large mappings on memory-limited devices. To reduce memory usage, keep arithmetic expressions simple and String lengths as short as possible.
