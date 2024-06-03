@@ -11,5 +11,5 @@ jobs:
       - name: Update Library
         run: |
           arduino-cli lib update-index
-          arduino-cli lib install TemplateTango --library-manager update
+          arduino-cli lib install TemplateTango
       - uses: arduino/arduino-lint-action@v1
