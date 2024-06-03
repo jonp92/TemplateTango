@@ -7,9 +7,9 @@ jobs:
       - name: Install Arduino CLI
         run: |
           curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+          sudo mv arduino-cli /usr/local/bin/
       - name: Update Library
         run: |
-          ./arduino-cli lib update-index
-          ./arduino-cli lib install TemplateTango --library-manager update
+          arduino-cli lib update-index
+          arduino-cli lib install TemplateTango --library-manager update
       - uses: arduino/arduino-lint-action@v1
-            
